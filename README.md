@@ -2,6 +2,7 @@
 <br/>
 
 > Protract: Accurate Object Tracking for Live Video Analytics on Resource-Constrained Edge Devices
+> 
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News

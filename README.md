@@ -2,7 +2,7 @@
 <br/>
 
 > Protract: Accurate Object Tracking for Live Video Analytics on Resource-Constrained Edge Devices
-> [Yi Wei*](https://weiyithu.github.io/), [Linqing Zhao*](https://github.com/lqzhao), [Wenzhao Zheng](https://scholar.google.com/citations?user=LdK9scgAAAAJ&hl=en), [Zheng Zhu](http://www.zhengzhu.net/), [Jiwen Lu](http://ivg.au.tsinghua.edu.cn/Jiwen_Lu/), [Jie Zhou](https://scholar.google.com/citations?user=6a79aPwAAAAJ&hl=en&authuser=1)  
+> [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News
 - [2022/7/14]: SurroundOcc is accepted to ICCV 2023! 

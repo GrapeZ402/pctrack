@@ -6,11 +6,9 @@
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News
-- [2022/7/14]: SurroundOcc is accepted to ICCV 2023! 
-- [2022/5/19]: We upload generated mesh vertices. You can downsample it and generate occupancy labels with arbitrary resolution.  
-- [2022/3/21]: Support for private data. You can try both occupancy prediction method and ground truth generation pipeline on your own data. 
-- [2022/3/17]: Initial code and paper release. 
-- [2022/2/27]: Demo release.
+- [2023/11/17]: Trajectory prediction dataset release. 
+- [2023/11/13]: Initial code and paper release. 
+- [2023/11/11]: Demo release.
 
 ## Demo  
 Demos are a little bit large; please wait a moment to load them. If you cannot load them or feel them blurry, you can click the hyperlink of each demo for the full-resolution raw video. Welcome to the home page for more demos and detailed introductions. 

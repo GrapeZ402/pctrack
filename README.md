@@ -52,9 +52,10 @@ pip install swig==4.1.1
 pip install oapackage==2.4.4
 ```
 
-## PCTrack training & evaluation
+## PCTrack evaluation
 
-
-
-
+- running PCTrack by using:
+```shell
+python3 test.py --data ${data} --delay ${delay} --method ${method}
+```
 

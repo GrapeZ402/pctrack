@@ -12,13 +12,17 @@
 - [2023/11/11]: Demo release.
 
 ## Introduction
+
+
+
 The task of live video analytics relies on real-time object tracking that typically involves 
 computationally expensive deep neural network (DNN) models. In practice, it has become essential 
 to process video data on edge devices deployed near the cameras. However, these edge devices 
 often have very limited computing resources and thus suffer from poor tracking accuracy. 
 Through a measurement study, we identify three major factors contributing to the performance issue: 
-outdated detection results, tracking error accumulation, and ignorance of new objects. We introduce 
-a novel approach, called Predict & Correct based Tracking, or PCTrack, to systematically address these problems. 
+outdated detection results, tracking error accumulation, and ignorance of new objects.
+
+We introduce a novel approach, called Predict & Correct based Tracking, or PCTrack, to systematically address these problems. 
 Our design incorporates three innovative components: 
 
 - (1) a **_Predictive Detection Propagator_** that rapidly updates outdated object bounding boxes to match the current frame 
@@ -26,18 +30,16 @@ through a lightweight prediction model;
 - (2) a **_Frame Difference Corrector_** that refines the object bounding boxes based on frame difference information; and
 - (3) a **_New Object Detector_** that efficiently discovers newly appearing objects during tracking. 
 
-Experimental results show that our approach achieves remarkable accuracy improvements, ranging **from 19.4% to 34.7%**, 
-across diverse traffic scenarios, compared to state of the art methods.
-
-## Demonstration
-
-
-## Method 
-
 PCTrack Pipeline:
 <p align='center'>
     <img src="https://github.com/GrapeZ402/pctrack/blob/main/vendors/framework.png" width="100%">
 </p>
+
+
+Experimental results show that our approach achieves remarkable accuracy improvements, ranging **from 19.4% to 34.7%**, 
+across diverse traffic scenarios, compared to state of the art methods.
+
+## Demonstration
 
 
 ## Repository requirements

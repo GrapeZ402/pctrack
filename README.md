@@ -29,6 +29,7 @@ through a lightweight prediction model;
 Experimental results show that our approach achieves remarkable accuracy improvements, ranging **from 19.4% to 34.7%**, 
 across diverse traffic scenarios, compared to state of the art methods.
 
+## Demonstration
 
 
 ## Method 
@@ -39,4 +40,21 @@ PCTrack Pipeline:
 </p>
 
 
-## 
+## Repository requirements
+
+- install Pytorch 1.10.0 in Jetson Nano or Jetson TX2 by following:
+https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048
+
+- install preliminary packages:
+```shell
+pip install scikit-learn opencv-python scipy numpy
+pip install swig==4.1.1
+pip install oapackage==2.4.4
+```
+
+## PCTrack training & evaluation
+
+
+
+
+

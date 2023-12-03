@@ -42,8 +42,8 @@ PCTrack Pipeline:
 
 ## Repository requirements
 
-- install Pytorch 1.10.0 in Jetson Nano or Jetson TX2 by following:
-https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048
+- install Pytorch 1.10.0 in Jetson Nano or Jetson TX2 by following the 
+[instruction](https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048)
 
 - install preliminary packages:
 ```shell

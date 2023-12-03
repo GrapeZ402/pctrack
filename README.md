@@ -1,7 +1,7 @@
 # Protract
 <br/>
 
-> Protract: Accurate Object Tracking for Live Video Analytics on Resource-Constrained Edge Devices
+> PCTrack: Accurate Object Tracking for Live Video Analytics on Resource-Constrained Edge Devices
 > 
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
@@ -11,11 +11,6 @@
 - [2023/11/13]: Initial code. 
 - [2023/11/11]: Demo release.
 
-## Demo  
-Demos are a little bit large; please wait a moment to load them. If you cannot load them or feel them blurry, you can click the hyperlink of each demo for the full-resolution raw video. Welcome to the home page for more demos and detailed introductions. 
-
-
-
 ## Introduction
 The task of live video analytics relies on real-time object tracking that typically involves computationally expensive deep learning techniques. In practice, it has become essential to process video data on edge devices deployed near the cameras. However, these edge devices often have very limited per-camera computing resources, leading to poor tracking accuracy. Our measurement study reveals three major factors contributing to the performance issue: outdated detection results, tracking error accumulation, and ignorance of new objects. To tackle these challenges, we introduce a novel approach called Predictive Object Tracking with Correction, or \ours. Our design incorporates three key innovations: 
 (1) a ***Predictive Detection Propagation*** method that rapidly updates outdated object bounding boxes to match the current frame through a lightweight prediction model; 
@@ -24,10 +19,10 @@ The task of live video analytics relies on real-time object tracking that typica
 
 ## Method 
 
-Protract Pipeline:
+PCTrack Pipeline:
 
 <p align='center'>
-<img src="./vendors/framework.pdf" width="720px">
+<img src="https://github.com/GrapeZ402/pctrack/blob/main/vendors/framework.png" width="720px">
 </p>
 
 

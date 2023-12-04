@@ -49,7 +49,7 @@ across diverse traffic scenarios, compared to state of the art methods.
 
 - install preliminary packages:
 ```shell
-pip install scikit-learn opencv-python scipy numpy
+pip install scikit-learn==0.24.2 opencv-python==4.8.1.78 scipy==1.5.4 numpy==1.19.5
 pip install swig==4.1.1
 pip install oapackage==2.4.4
 ```

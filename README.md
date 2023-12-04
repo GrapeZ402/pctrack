@@ -6,15 +6,12 @@
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News
-- [2023/11/24]: The paper is under review for ICDE-2024.
-- [2023/11/17]: Trajectory prediction dataset release. 
+- [2023/12/04]: The paper is under review for ICDE-2024.
+- [2023/11/27]: Trajectory prediction dataset release. 
 - [2023/11/13]: Initial code. 
 - [2023/11/11]: Demo release.
 
 ## Introduction
-
-
-
 The task of live video analytics relies on real-time object tracking that typically involves 
 computationally expensive deep neural network (DNN) models. In practice, it has become essential 
 to process video data on edge devices deployed near the cameras. However, these edge devices 
@@ -58,6 +55,11 @@ pip install oapackage==2.4.4
 
 - running PCTrack by using:
 ```shell
-python3 test.py --data ${data} --delay ${delay} --method ${method}
+python3 test.py --data ${data} --delay ${delay} --method ${method} --save
 ```
+
+- the key parameters used in `test.py` is defined as follows:
+  - `data`: the selected dataset
+  - `delay`: 
+  - `method`: 
 

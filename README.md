@@ -51,15 +51,28 @@ pip install swig==4.1.1
 pip install oapackage==2.4.4
 ```
 
+## Dataset 
+Download full dataset data [HERE](https://pan.baidu.com/s/19-020sD0cJ0wbD0XoYGR6g) (the password is `402C`). Folder structure:
+```
+pctrack
+├── datasets/
+│   ├── OnRamp/
+│   ├── Intersect/
+│   ├── Express/
+│   ├── UrbMixed/
+```
+
+
+
 ## PCTrack evaluation
 
 - running PCTrack by using:
 ```shell
-python3 test.py --data ${data} --delay ${delay} --method ${method} --save
+python3 test.py --dataset ${dataset} --delay ${delay} --method ${method} --save
 ```
 
 - the key parameters used in `test.py` is defined as follows:
-  - `data`: the selected dataset
+  - `dataset`: the selected dataset
   - `delay`: 
   - `method`: 
 

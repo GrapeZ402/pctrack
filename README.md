@@ -19,7 +19,7 @@ often have very limited computing resources and thus suffer from poor tracking a
 Through a measurement study, we identify three major factors contributing to the performance issue: 
 outdated detection results, tracking error accumulation, and ignorance of new objects.
 
-We introduce a novel approach, called Predict & Correct based Tracking, or PCTrack, to systematically address these problems. 
+We introduce a novel approach, called **Predict & Correct based Tracking**, or **`PCTrack`**, to systematically address these problems. 
 Our design incorporates three innovative components: 
 
 - (1) a **_Predictive Detection Propagator_** that rapidly updates outdated object bounding boxes to match the current frame 

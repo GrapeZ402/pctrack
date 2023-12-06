@@ -68,4 +68,15 @@ pctrack
 ```
 
 
+## PCTrack evaluation
+
+- running PCTrack by using:
+```shell
+python3 test.py --dataset ${dataset} --delay ${delay} --method ${method} --save
+```
+
+- the key parameters used in `test.py` is defined as follows:
+  - `dataset`: the selected dataset
+  - `delay`: 
+  - `method`: 
 

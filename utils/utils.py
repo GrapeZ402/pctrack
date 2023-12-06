@@ -66,17 +66,6 @@ def box2axis(box):
     return [(box[0],box[1]),(box[2],box[1]),(box[2],box[3]),(box[0],box[3])]
 
 def box_iou(box1, box2):
-    # https://github.com/pytorch/vision/blob/master/torchvision/ops/boxes.py
-    """
-    Return intersection-over-union (Jaccard index) of boxes.
-    Both sets of boxes are expected to be in (x1, y1, x2, y2) format.
-    Arguments:
-        box1 (Tensor[N, 4])
-        box2 (Tensor[M, 4])
-    Returns:
-        iou (Tensor[N, M]): the NxM matrix containing the pairwise
-            IoU values for every element in boxes1 and boxes2
-    """
 
     def box_area(box):
         # box = 4xn
@@ -90,19 +79,6 @@ def box_iou(box1, box2):
     return inter / (area1[:, None] + area2 - inter)  # iou = inter / (area1 + area2 - inter)
 
 def box_iou_np(box1, box2):
-    # https://github.com/pytorch/vision/blob/master/torchvision/ops/boxes.py
-    """
-    Return intersection-over-union (Jaccard index) of boxes.
-    Both sets of boxes are expected to be in (x1, y1, x2, y2) format.
-    Arguments:
-        box1 (Tensor[N, 4])
-        box2 (Tensor[M, 4])
-    Returns:
-        iou (Tensor[N, M]): the NxM matrix containing the pairwise
-            IoU values for every element in boxes1 and boxes2
-    改为numpy形式
-    """
-
     def box_area(box):
         # box = 4xn
         return (box[2] - box[0]) * (box[3] - box[1])
@@ -131,26 +107,16 @@ def creat_mask(frame_gray, label, fw, fh):
     for b in label:
         #print(int(b[0]))
         #print(b[1])
-        bx1 = int((b[0]-0.5*b[2])*fw)#!
+        bx1 = int((b[0]-0.5*b[2])*fw)
         bx2 = int((b[0]+0.5*b[2])*fw)
         by1 = int((b[1]-0.5*b[3])*fh)
         by2 = int((b[1]+0.5*b[3])*fh)
         mask_use[by1:by2,bx1:bx2] = 255
     return mask_use
 
-"""
-def if_in(box,point):
-    #box:[x y x y] 
-    #box,point = torch.tensor(box),torch.tensor(point)
-    if (box[0]-point[0])*(box[2]-point[0])<0 and (box[1]-point[1])*(box[3]-point[1])<0:
-        return True
-    else:
-        return False
-"""
-#@numba.jit(nopython=True)
+
 def creat_matrix(label, feature, fw, fh):
-    #create the connect matrix of every box and feature
-    #based on the first point of a feature
+
     if len(feature.shape) == 3:
         feature = feature[:,0,:]
         
@@ -162,7 +128,6 @@ def creat_matrix(label, feature, fw, fh):
     boxes[:,2] *= fw
     boxes[:,3] *= fh
     
-    # 使用 Numpy 的广播操作
     
     in_matrix = np.logical_and(
         feature[:, 0][:, None] >= boxes[:, 0][None, :], 
@@ -173,16 +138,9 @@ def creat_matrix(label, feature, fw, fh):
     )
     
     matrix[np.transpose(in_matrix)] = 10
-    #print(time.time()-t1)
-    """
-    for i,p in enumerate(feature):      
-        for j,l in enumerate(boxes):
-            if if_in(l,p[0]):
-                matrix[j][i]=10
-    """
+
     return matrix
 
-#按照traj，将label往后传播，需要重写为加入了修正的版本
 def move_box(label, traj, row_ind):
     clses,boxes = torch.tensor(label)[:,0].to(device),torch.tensor(label)[:,1:].to(device)
     xyxyboxes = xywh2xyxyn(boxes)
@@ -223,35 +181,6 @@ def move_resize(f_p, f_n, box):
     nb = xyxy2xywh(nb)
     return nb
 
-"""
-def move_resize(f_p, f_n, box):
-    #f_p, f_n: [num_features,3]
-    #box: xyxy
-    #return: new box
-
-    p_p, p_n = f_p[:,:2],f_n[:,:2]
-
-    box_p = torch.tensor([min(p_p[:,0]),min(p_p[:,1]),max(p_p[:,0]),max(p_p[:,1])])
-    box_n = torch.tensor([min(p_n[:,0]),min(p_n[:,1]),max(p_n[:,0]),max(p_n[:,1])])
-
-    box_p_xywh = xyxy2xywh(box_p.unsqueeze(0))[0]
-    box_n_xywh = xyxy2xywh(box_n.unsqueeze(0))[0]
-
-    move_x,move_y = box_n_xywh[0]-box_p_xywh[0], box_n_xywh[1]-box_p_xywh[1]
-    re_x, re_y = box_n_xywh[2]/box_p_xywh[2], box_n_xywh[3]/box_p_xywh[3]
-
-    nb = xyxy2xywh(box.unsqueeze(0))[0]
-    nb[0],nb[1] = nb[0]+move_x, nb[1]+move_y
-    if f_p.shape[0]!=1 and f_n.shape[0]!=1:
-        nb[2],nb[3] = nb[2]*re_x, nb[3]*re_y
-
-    if nb[0]+0.5*nb[2]>=1 or nb[1]+0.5*nb[3]>=1:
-        nb = xywh2xyxy(nb.unsqueeze(0))[0]
-        nb[0],nb[1],nb[2],nb[3] = max(0,nb[0]),max(0,nb[1]),min(1,nb[2]),min(1,nb[3])
-        nb = xyxy2xywh(nb.unsqueeze(0))[0]
-    return nb
-"""
-
 def move_box_multi(label, traj, row_ind):
     clses,boxes = np.array(label)[:,0],np.array(label)[:,1:]
     traj_len = WINDOW 
@@ -273,7 +202,6 @@ def move_box_multi(label, traj, row_ind):
     return result
 
 def rescale_box(box_xywh,area_xyxy):
-    #都是归一化后的值
     w = area_xyxy[2]-area_xyxy[0]
     h = area_xyxy[3]-area_xyxy[1]
 
@@ -306,8 +234,6 @@ def rescale_box_2(box_xyxy,area_xyxy):
 def framediff(img0,img1):
     k_size = 3
     threshold = 15
-    iterations = 2
-    min_area = 300
 
     es = cv2.getStructuringElement(
             cv2.MORPH_ELLIPSE, (k_size, k_size))
@@ -323,38 +249,10 @@ def framediff(img0,img1):
 
     ret, mask = cv2.threshold(diff, threshold, 255, cv2.THRESH_BINARY)
     
-    mask = cv2.dilate(mask, es, 2)  #膨胀
-    mask = cv2.erode(mask, es, 2)   #腐蚀
+    mask = cv2.dilate(mask, es, 2) 
+    mask = cv2.erode(mask, es, 2)  
 
     return mask#, cnts #diff, bounds
-
-def framediff3(img0,img1,img2):
-    k_size = 3
-    threshold = 15
-    iterations = 2
-    min_area = 300
-
-    es = cv2.getStructuringElement(
-            cv2.MORPH_ELLIPSE, (k_size, k_size))
-
-    if len(img0.shape) == 3: 
-        img0 = cv2.cvtColor(img0, cv2.COLOR_BGR2GRAY)
-        img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
-        img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
-    
-    diff1 = cv2.absdiff(img0,img1)   
-    diff2 = cv2.absdiff(img1,img2)
-    diff = cv2.bitwise_and(diff1, diff2)
-    
-    #diff = cv2.medianBlur(diff, k_size)
-    diff = cv2.GaussianBlur(diff, (k_size, k_size), 0)
-
-    ret, mask = cv2.threshold(diff, threshold, 255, cv2.THRESH_BINARY)
-    
-    mask = cv2.dilate(mask, es, 2)  #膨胀
-    mask = cv2.erode(mask, es, 2)   #腐蚀
-
-    return mask#,cnts #diff ,bounds
 
 
 def if_legal(box, box_type=0):
@@ -372,65 +270,37 @@ def save_txt(result, fid):
     isExist = os.path.exists(result_path)
     if not isExist:
         os.makedirs(result_path)
-    z = '000000'
 
     clses,boxes = result
     for cls, box in zip(clses,boxes):
         cls,box = cls.tolist(),box.tolist()
         line = (cls,*box)
-        with open(result_path+ z[0:-len(str(fid))]+str(fid) + '.txt', 'a') as f:
+        with open(result_path+'{:0>6}.jpg'.format(fid), 'a') as f:
             f.write(('%g ' * len(line)).rstrip() % line + '\n')
     return 0
 
-#点的平滑度
-# 输入特征点的 x 和 y 坐标数组，返回运动轨迹平滑的特征点的下标
+
 def smooth_points(X, pos_thrs, dir_thrs, acc_thrs):
     P, N, D = X.shape
-    # 计算速度和加速度的平均值
     V = np.gradient(X, axis=0)
     A = np.gradient(V, axis=0)
     x_diff = np.linalg.norm((X[-1]-X[0]), axis=-1)
-    # 判断特征点是否静止
   
     stationary_points = np.logical_or(np.less(x_diff, pos_thrs), np.greater(x_diff, 100))
 
-    # 判断特征点是否属于车辆
     car_points = np.zeros(N, dtype=bool)
     
-    # 计算运动方向的变化
     angle = np.arctan2(V[:, :, 1], V[:, :, 0])
     direction = np.gradient(angle, axis=0)
 
-    # 判断方向连续性和加速度的大小
-    #print(direction,np.max(np.linalg.norm(A, axis=-1),axis=0))
     mask = np.all(np.abs(direction) < dir_thrs,axis=0)
 
     mask &= np.max(np.linalg.norm(A, axis=-1),axis=0) < acc_thrs
     
-    # 根据静止点和车辆特征点的状态确定车辆特征点
 
     car_points[mask & ~stationary_points] = True
 
     return np.nonzero(car_points)[0]
-
-#插值,需改
-def bbox_interpolate(bbox_a, bbox_a_b, b):
-    xa, ya = bbox_a[:,0],bbox_a[:,1]
-    wa, ha = bbox_a[:,2],bbox_a[:,3]
-    xab, yab = bbox_a_b[:,0],bbox_a_b[:,1]
-    wab, hab = bbox_a_b[:,2],bbox_a_b[:,3]
-    print(xa)
-    # 计算插值
-    xb = [xa + (xab-xa) * i / (b + 1) for i in range(1, b + 1)]
-    yb = [ya + (yab-ya) * i / (b + 1) for i in range(1, b + 1)]
-    wb = [wa + (wab-wa) * i / (b + 1) for i in range(1, b + 1)]
-    hb = [ha + (hab-ha) * i / (b + 1) for i in range(1, b + 1)]
-    print(xb)
-    # 计算坐标框
-    bbox_b = [[(xb[i][j], yb[i][j], wb[i][j], hb[i][j]) for i in range(b)] for j in range(len(bbox_a))]
-
-    #return: n个间隔，补b帧，[n, b, 4]
-    return np.array(bbox_b)
 
 
 def normalize(data, mean, std):
@@ -450,7 +320,6 @@ def denormalize(data, mean, std):
     return data
 
 def convert_cc_to_wc(points, P_inv):
-    #points: NxMx2 图像坐标系下的点
     points[:,:,0] = points[:,:,0]*fw
     points[:,:,1] = points[:,:,1]*fh
     P_inv = torch.tensor(P_inv)
@@ -465,7 +334,6 @@ def convert_cc_to_wc(points, P_inv):
 
 def convert_wc_to_cc(points, P):
 
-    #points: NxMx2 世界坐标系下的点
     P = torch.tensor(P)
     z = torch.ones([points.shape[0],points.shape[1],1])
     wc = torch.cat([points, z], 2)

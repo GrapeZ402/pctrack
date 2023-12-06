@@ -6,8 +6,6 @@ from utils.utils import *
 from utils.config import *
 
 import time
-import psutil
-
 
 
 class Timer:
@@ -34,11 +32,10 @@ class Timer:
         return id
 
 
-# @profile
 def run(label_all, save_result = save):
   
     fid = 1+WINDOW   
-    f_count = 0     #一个窗口的计数
+    f_count = 0     
 
     tracker = Tracker(label = label_all[fid-1-WINDOW], start_id = fid, method = method)
     timer = Timer()
@@ -47,7 +44,7 @@ def run(label_all, save_result = save):
    
     while fid <= WINDOW*(nw+1):
         
-        #print("FID: ",fid)
+ 
         if f_count == 0 :    #30(0)
             DP_finished = 0
             t1 = time.time()
@@ -57,25 +54,19 @@ def run(label_all, save_result = save):
             t2 = time.time()
             timer.delet_time(t2-t1)
 
-            tracker.detectFeatures()
-            #IDP
-            
+            tracker.detectFeatures()         
             if method == "ours":
-                tracker.predict_IDP()
+                tracker.PDP()
             elif method == "base":
-                tracker.glimpse_IDP()
-            #tracker.no_IDP()
-            
-            
-            
+                tracker.IDP()
 
             tt = time.time() - t2
             idp_t += tt
-            print("IDP: ",timer.get_realtime_id(),"\ttime: ",tt)
+            print("DP: ",timer.get_realtime_id(),"\ttime: ",tt)
 
 
-        else:   #1-29
-            #"""
+        else:  
+
             id = timer.get_realtime_id()
             if id < fid:
                 timer.sleep()
@@ -83,50 +74,35 @@ def run(label_all, save_result = save):
 
             if id > fid:
                 tracker.jump_frame()
-                print("jump:  ",fid)
-                          
+                print("jump:  ",fid)                      
             
-            #"""
             else:
                 t1 = time.time()
                 if not DP_finished:
-                    print("finish")
                     DP_finished = 1
                     
                     tracker.detectFeatures()
                     tracker.update_after_dp()
-                    
-                    #加一次optital flow & move
-                    
+                                     
                     tracker.OpticalFlow()
                     
-                    #tracker.curr_id -= 2
-                    #tracker.prev_id -= 2
                     
                     tracker.move_box()  
                     if method == "ours":
-                        #tracker.det_newobj(newobj_area)   
-                        tracker.diffixer()
+                        tracker.FDC()
                
-                tracker.OpticalFlow()                   #③
-                
-                        
-                        
+                tracker.OpticalFlow()              
+                                                          
                 t2 = time.time()
-                #移动目标框
-                tracker.move_box()                          #⑤
+                tracker.move_box()                         
                 t3 = time.time()
                 t4 = time.time()
-                #修正/新目标检测
 
                 if method == "ours":
                     if f_count%5 == 0: 
-
-                        tracker.det_newobj(params['newobj_area'])                            #⑥
-              
+                        tracker.det_newobj(params['newobj_area'])                    
                         t4 = time.time() 
-
-                        tracker.diffixer()                      #⑦
+                        tracker.FDC()             
 
                 
                 tt1, tt2, tt3, tt4 = t2-t1, t3-t2, t4-t3, time.time()-t4
@@ -136,14 +112,12 @@ def run(label_all, save_result = save):
                 newo_t += tt4
                 print("track: ",fid,"\ttime: ",tt1+tt2+tt3+tt4,"(",tt1,tt2,tt3,tt4,")")
 
-        #------------save-------------------
         t1 = time.time()
         result = tracker.getBboxResult()
         if save_result:
             save_txt(result, fid)
         t2 = time.time()
         timer.delet_time(t2-t1)
-        #-------------------------------------
          
         f_count = (f_count + 1) % WINDOW
           
@@ -165,7 +139,6 @@ if __name__ == '__main__':
             with open(label_path+filename, "r") as f:
                 for line in f.readlines():    #each line
                     line = line.strip('\n') 
-                    #line = [float(x) for x in line_s.split()] 
                     
                     label.append(list(float(i) for i in line.split()))
             label_all.append(label)

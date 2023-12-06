@@ -75,3 +75,10 @@ pctrack
 python3 run.py
 ```
 
+- the key parameters used in `test.py` is defined as follows:
+  - `data`: type=int, choices=[0,1,2,3], default=1
+  - `delay`: type=int, choices=[0,1,2,3,4], default=1
+  - `method`: type=str, choices=['ours', 'base'], default='ours'
+  - `source`: type=str, default='datasets/OnRamp/'
+  - `label`: type=str, default='datasets/labels/OnRamp_label/'
+  - `--save`: type=bool, default=False

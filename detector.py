@@ -18,7 +18,6 @@ from apps.yolov5.utils.datasets import LoadImages
 
 class Detector():
     def __init__(self) -> None:
-        #加载模型
 
         self.model = DetectMultiBackend(detect_model, device=device)
         imgsz = check_img_size(imgsz, s=self.model.stride)
@@ -26,8 +25,6 @@ class Detector():
         self.model.model.float()
         self.model.warmup(imgsz=(1, 3, *imgsz), half=False)  # warmup
 
-        # source_path = 'D:/code/datasets/data2-new/'
-        # dataset = LoadImages(source_path, img_size=imgsz, stride=self.model.stride, auto=True)
 
 
     def yolov5_detect(self, im0):
@@ -44,7 +41,6 @@ class Detector():
         if len(im.shape) == 3:
             im = im[None]  # expand for batch dim
 
-        #对数据进行推理
         pred = self.model(im, augment=False, visualize=False)
         pred = non_max_suppression(pred, 0.4, 0.45, [0,2], False, max_det=1000)
         # Process predictions
@@ -60,7 +56,6 @@ class Detector():
                     #print(xyxy,conf,cls)
                     xywh = (xyxy2xywhn(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                     
-                    #保存txt
                     """
                     isExist = os.path.exists(save_txt_path)
                     line = (cls, *xywh)
@@ -76,10 +71,3 @@ class Detector():
 
         return im0,formatBoxes
 
-
-
-# for path, _, im0, vid_cap, s in dataset:
-#     t1 = time_sync()
-#     _,box = yolov5_detect(im0)
-#     print(time_sync() - t1)
-#     print(box)

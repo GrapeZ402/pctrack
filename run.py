@@ -1,6 +1,4 @@
 import os
-from model.lstm import *
-from model.cnn_lstm import *
 from tracker import *
 from utils.utils import *
 from utils.config import *
@@ -100,7 +98,7 @@ def run(label_all, save_result = save):
 
                 if method == "ours":
                     if f_count%5 == 0: 
-                        tracker.det_newobj(params['newobj_area'])                    
+                        tracker.det_newobj(np.array(params['newobj_area']))                    
                         t4 = time.time() 
                         tracker.FDC()             
 
@@ -127,12 +125,15 @@ def run(label_all, save_result = save):
     print("Avg time: ",total_time/nw, idp_t/nw, track_t/nw, move_t/nw, fix_t/nw, newo_t/nw)
     return 0
 
-
 if __name__ == '__main__':
+    if not os.path.exists(source):
+        raise FileNotFoundError("Source path " + source + " does not exist")
+    if not os.path.exists(label_path):
+        raise FileNotFoundError("Label path " + label_path + " does not exist")
     total_time = 0
     for _,_,filenames in os.walk(label_path):
         filenames.sort()
-        label_all = []
+        detect_res = []
         for i,filename in enumerate(filenames) :
             frame_id=int(filename[0:6])
             label = []       
@@ -141,8 +142,8 @@ if __name__ == '__main__':
                     line = line.strip('\n') 
                     
                     label.append(list(float(i) for i in line.split()))
-            label_all.append(label)
+            detect_res.append(label)
 
     
-    run(label_all)
+    run(detect_res)
 

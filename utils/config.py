@@ -3,11 +3,12 @@ import numpy as np
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data', type=int, choices=[0,1,2,3])
-parser.add_argument('--delay', type=int, choices=[0,1,2,3,4])
-parser.add_argument('--method', type=str, choices=['ours', 'base'])
-parser.add_argument('--source', type=str)
-parser.add_argument('--save', type=bool)
+parser.add_argument('--data', type=int, choices=[0,1,2,3], default=1)
+parser.add_argument('--delay', type=int, choices=[0,1,2,3,4], default=1)
+parser.add_argument('--method', type=str, choices=['ours', 'base'], default='ours')
+parser.add_argument('--source', type=str, default='datasets/OnRamp/')
+parser.add_argument('--label', type=str, default='datasets/labels/OnRamp_label/')
+parser.add_argument('--save', type=bool, default=False)
 
 args = parser.parse_args()
 data_param = args.data
@@ -15,11 +16,13 @@ delay_param = args.delay
 method = args.method
 save = args.save
 source = args.source
+label_path = args.label
 
 
 WINDOW_LIST = [25,30,35,40,45]
 feature_quality_level = 0.2
 downsample = 5
+FPS = 30
 
 if data_param==2:
     fw,fh = 1280, 720

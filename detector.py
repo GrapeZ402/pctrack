@@ -1,15 +1,5 @@
 import torch
 from utils import *
-
-import argparse
-import os
-import sys
-from pathlib import Path
-
-import cv2
-import torch
-import torch.backends.cudnn as cudnn
-
 from apps.yolov5.models.common import *
 from apps.yolov5.models.experimental import *
 from apps.yolov5.utils.general import *
@@ -17,15 +7,13 @@ from apps.yolov5.models.yolo import *
 from apps.yolov5.utils.datasets import LoadImages
 
 class Detector():
-    def __init__(self) -> None:
-
+    def __init__(self, imgsz) -> None:
+        self.imgsz = imgsz
         self.model = DetectMultiBackend(detect_model, device=device)
-        imgsz = check_img_size(imgsz, s=self.model.stride)
+        imgsz = check_img_size(self.imgsz, s=self.model.stride)
 
         self.model.model.float()
         self.model.warmup(imgsz=(1, 3, *imgsz), half=False)  # warmup
-
-
 
     def yolov5_detect(self, im0):
         formatBoxes = []
@@ -56,18 +44,10 @@ class Detector():
                     #print(xyxy,conf,cls)
                     xywh = (xyxy2xywhn(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                     
-                    """
-                    isExist = os.path.exists(save_txt_path)
-                    line = (cls, *xywh)
-                    if not isExist:
-                        os.makedirs(save_txt_path)
-                    with open(save_txt_path+frame["Name"].split(".")[0] + '.txt', 'a') as f:
-                        f.write(('%g ' * len(line)).rstrip() % line + '\n')    
-                    """
                     conf = conf.tolist()
                     cls = cls.tolist()
 
-                    formatBoxes.append([cls, *xywh, conf])
+                    formatBoxes.append([cls, *xywh])
 
         return im0,formatBoxes
 

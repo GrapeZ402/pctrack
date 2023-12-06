@@ -76,9 +76,9 @@ python3 run.py
 ```
 
 - the key parameters used in `test.py` are defined as follows:
-  - `data`: type=str, choices=['OnRamp', 'Intersect', 'Express', 'UrbMixed'], default='OnRamp'
-  - `delay`: type=int, choices=[25, 30, 35, 40, 45], default=30
-  - `method`: type=str, choices=['ours', 'base'], default='ours'
-  - `source`: type=str, default='datasets/OnRamp/'
-  - `label`: type=str, default='datasets/labels/OnRamp_label/'
+  - `--data`: type=str, choices=['OnRamp', 'Intersect', 'Express', 'UrbMixed'], default='OnRamp'
+  - `--delay`: type=int, choices=[25, 30, 35, 40, 45], default=30
+  - `--method`: type=str, choices=['ours', 'base'], default='ours'
+  - `--source`: type=str, default='datasets/OnRamp/'
+  - `--label`: type=str, default='datasets/labels/OnRamp_label/'
   - `--save`: type=bool, default=False

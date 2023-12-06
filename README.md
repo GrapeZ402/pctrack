@@ -7,7 +7,7 @@
 
 ## News
 - [2023/12/04]: The paper is under review for ICDE-2024.
-- [2023/11/27]: Trajectory prediction dataset release. 
+- [2023/11/27]: Dataset release. 
 - [2023/11/13]: Initial code. 
 - [2023/11/11]: Demo release.
 

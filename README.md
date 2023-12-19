@@ -38,6 +38,12 @@ across diverse traffic scenarios, compared to state of the art methods.
 
 ## Demonstration
 
+The detection and tracking process of a segment of dataset OnRamp with PCTrack and MARLIN+IDP: 
+<p align='center'>
+    <img src="https://github.com/GrapeZ402/pctrack/blob/main/vendors/compare.png" width="100%">
+</p>
+
+
 
 ## Repository requirements
 

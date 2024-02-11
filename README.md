@@ -6,7 +6,7 @@
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News
-- [2023/12/03]: The paper is under review for ICDE-2024.
+- [2024/02/15]: The paper is under review for ToN.
 - [2023/11/27]: Dataset release. 
 - [2023/11/13]: Initial code. 
 - [2023/11/11]: Demo release.

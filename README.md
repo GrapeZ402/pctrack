@@ -6,7 +6,7 @@
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News
-- [2024/03/18]: The paper is under review for IEEE Transactions on Circuits and Systems for Video Technology (TCSVT).
+- [2024/02/18]: The paper is under review for IEEE Transactions on Circuits and Systems for Video Technology (TCSVT).
 - [2023/11/27]: Dataset release. 
 - [2023/11/13]: Initial code. 
 - [2023/11/11]: Demo release.

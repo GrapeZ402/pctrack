@@ -6,10 +6,22 @@
 > [Xinyi Zhang](https://github.com/GrapeZ402), [Haoran Xu](https://scholar.google.com/citations?user=UOwYW7gAAAAJ&hl=en), [Chenyun Yu](https://scholar.google.com/citations?user=xlnfZAcAAAAJ&hl=en&oi=ao), [Guang Tan*](https://scholar.google.com/citations?user=JerZls4AAAAJ&hl=en&oi=ao)
 
 ## News
-- [2024/02/18]: The paper is under review for IEEE Transactions on Circuits and Systems for Video Technology (TCSVT).
+- [2024/12/27]: The paper is accepted by IEEE TCSVT
+- [2024/02/18]: The paper is under review for IEEE TCSVT.
 - [2023/11/27]: Dataset release. 
 - [2023/11/13]: Initial code. 
 - [2023/11/11]: Demo release.
+
+## Bibtex
+If this work is helpful for your research, please consider citing the following BibTeX entry:
+```
+@ARTICLE{zhang2024pctrack,
+  author={Zhang, Xinyi and Xu, Haoran and Yu, Chenyun and Tan, Guang},
+  journal={IEEE Transactions on Circuits and Systems for Video Technology}, 
+  title={PCTrack: Accurate Object Tracking for Live Video Analytics on Resource-Constrained Edge Devices}, 
+  year={2024}
+}
+```
 
 ## Introduction
 The task of live video analytics relies on real-time object tracking that typically involves 

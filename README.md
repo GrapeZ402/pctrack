@@ -15,11 +15,14 @@
 ## Bibtex
 If this work is helpful for your research, please consider citing the following BibTeX entry:
 ```
-@ARTICLE{zhang2024pctrack,
+@ARTICLE{zhang2025pctrack,
   author={Zhang, Xinyi and Xu, Haoran and Yu, Chenyun and Tan, Guang},
   journal={IEEE Transactions on Circuits and Systems for Video Technology}, 
   title={PCTrack: Accurate Object Tracking for Live Video Analytics on Resource-Constrained Edge Devices}, 
-  year={2024}
+  year={2025},
+  volume={35},
+  number={5},
+  pages={3969-3982},
 }
 ```
 
